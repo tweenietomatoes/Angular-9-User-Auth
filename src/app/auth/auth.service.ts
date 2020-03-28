@@ -5,6 +5,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 import { User, Login } from '../auth.model';
+import { env } from '../env';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,7 @@ export class AuthService {
   }
 
   login(loginInfo: Login): Observable<void> {
-    return this.http.post<User>('http://dev.temelkuran.ist/api/login', loginInfo)
+    return this.http.post<User>(env.loginUrl, loginInfo)
       .pipe(map(data => {
         this.user = {
           access_token: data.access_token,
